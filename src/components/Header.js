@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Header.module.css";
 import SearchIcon from "@mui/icons-material/Search";
+import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 
 const Header = () => {
   return (
@@ -26,6 +27,14 @@ const Header = () => {
         <div className={styles.header__option}>
           <span className={styles.header__optionLineOne}>Your</span>
           <span className={styles.header__optionLineTwo}>Prime</span>
+        </div>
+        <div className={styles.header__optionBasket}>
+          <ShoppingBasketIcon />
+          <span
+            className={`${styles.header__optionLineTwo} ${styles.header__basketCount}`}
+          >
+            0
+          </span>
         </div>
       </div>
     </div>
