@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./Product.module.css";
+import { StateContext } from "../store/StateProvider";
 
-const Product = ({ title, price, image, rating }) => {
+const Product = ({ id, title, price, image, rating }) => {
+  const [appData, dispatchAction] = useContext(StateContext);
+
+  const addToBasketHandler = () => {
+    // add item into application wide state object
+    dispatchAction({
+      type: "ADD_TO_BASKET",
+      item: {
+        id: id,
+        title: title,
+        image: image,
+        price: price,
+        rating: rating,
+      },
+    });
+  };
+
   return (
     <div className={styles.product}>
       <div className={styles.product__info}>
@@ -19,7 +36,7 @@ const Product = ({ title, price, image, rating }) => {
         </div>
       </div>
       <img src={image} alt="book_name" />
-      <button>Add to Basket</button>
+      <button onClick={addToBasketHandler}>Add to Basket</button>
     </div>
   );
 };

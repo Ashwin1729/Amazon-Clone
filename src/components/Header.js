@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 import SearchIcon from "@mui/icons-material/Search";
+import { StateContext } from "../store/StateProvider";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 
 const Header = () => {
+  const [appData, dispatchAction] = useContext(StateContext);
+
   return (
     <div className={styles.header}>
       <Link to="/">
@@ -37,7 +40,7 @@ const Header = () => {
             <span
               className={`${styles.header__optionLineTwo} ${styles.header__basketCount}`}
             >
-              0
+              {appData.basket?.length}
             </span>
           </div>
         </Link>
