@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./Checkout.module.css";
 import Subtotal from "./Subtotal";
+import { StateContext } from "../store/StateProvider";
+import CheckoutProduct from "./CheckoutProduct";
 
 const Checkout = () => {
+  const [{ basket }, dispatchAction] = useContext(StateContext);
+
   return (
     <div className={styles.checkout}>
       <div className={styles.checkout__left}>
@@ -17,6 +21,15 @@ const Checkout = () => {
         </div>
 
         {/* Basket Item  */}
+        {basket.map((item) => (
+          <CheckoutProduct
+            key={item.id}
+            id={item.id}
+            title={item.title}
+            price={item.price}
+            image={item.image}
+          />
+        ))}
       </div>
 
       <div className={styles.checkout__right}>
