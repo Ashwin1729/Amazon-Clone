@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./CheckoutProduct.module.css";
+import { StateContext } from "../store/StateProvider";
 
 const CheckoutProduct = ({ id, image, title, price, rating }) => {
-  const removeFromBasketHandler = () => {};
+  const [appData, dispatchAction] = useContext(StateContext);
+
+  const removeFromBasketHandler = () => {
+    // remove item from basket
+    dispatchAction({
+      type: "REMOVE_FROM_BASKET",
+      payload: id,
+    });
+  };
 
   return (
     <div className={styles.checkoutProduct}>
