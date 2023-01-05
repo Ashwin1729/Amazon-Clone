@@ -4,9 +4,16 @@ import styles from "./Header.module.css";
 import SearchIcon from "@mui/icons-material/Search";
 import { StateContext } from "../store/StateProvider";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import { auth } from "../firebase";
 
 const Header = () => {
   const [appData, dispatchAction] = useContext(StateContext);
+
+  const authHandler = () => {
+    if (appData.user) {
+      auth.signOut();
+    }
+  };
 
   return (
     <div className={styles.header}>
@@ -22,10 +29,12 @@ const Header = () => {
         <SearchIcon className={styles.header__searchIcon} />
       </div>
       <div className={styles.header__nav}>
-        <Link to="/login">
-          <div className={styles.header__option}>
+        <Link to={!appData.user && "/login"}>
+          <div className={styles.header__option} onClick={authHandler}>
             <span className={styles.header__optionLineOne}>Hello Guest</span>
-            <span className={styles.header__optionLineTwo}>Sign In</span>
+            <span className={styles.header__optionLineTwo}>
+              {appData.user ? "Sign Out" : "Sign In"}
+            </span>
           </div>
         </Link>
         <div className={styles.header__option}>
