@@ -7,6 +7,7 @@ import Checkout from "./components/Checkout";
 import Login from "./components/Login";
 import { StateContext } from "./store/StateProvider";
 import { auth } from "./firebase";
+import Payment from "./components/Payment";
 
 function App() {
   const [appData, dispatchAction] = useContext(StateContext);
@@ -41,6 +42,16 @@ function App() {
               <div>
                 <Header />
                 <Checkout />
+              </div>
+            }
+          />
+          <Route
+            exact
+            path="/checkout/payment"
+            element={
+              <div>
+                <Header />
+                <Payment />
               </div>
             }
           />

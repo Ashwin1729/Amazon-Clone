@@ -3,7 +3,6 @@ import styles from "./Product.module.css";
 import { StateContext } from "../store/StateProvider";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { grey } from "@mui/material/colors";
 
 const Product = ({ id, title, price, image, rating }) => {
   const [appData, dispatchAction] = useContext(StateContext);

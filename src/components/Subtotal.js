@@ -2,9 +2,16 @@ import React, { useContext } from "react";
 import styles from "./Subtotal.module.css";
 import CurrencyFormat from "react-currency-format";
 import { StateContext } from "../store/StateProvider";
+import { useNavigate } from "react-router-dom";
 
 const Subtotal = () => {
   const [appData, dispatchAction] = useContext(StateContext);
+
+  const navigate = useNavigate();
+
+  const checkoutHandler = () => {
+    navigate("./payment");
+  };
 
   const clacTotalAmount = (items, prop) => {
     return items.reduce((acc, curr) => acc + curr[prop], 0);
@@ -32,7 +39,7 @@ const Subtotal = () => {
         prefix={"$"}
       />
 
-      <button>Proceed to Checkout</button>
+      <button onClick={checkoutHandler}>Proceed to Checkout</button>
     </div>
   );
 };
