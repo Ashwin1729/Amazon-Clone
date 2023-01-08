@@ -25,9 +25,11 @@ const Payment = () => {
     // generate special client secret for client payment processing
     const getClientSecret = async () => {
       const response = await axios({
-        method: "POST",
+        method: "post",
         // stripe expects the total in a currencies subunits
-        url: `/payments/create?total=${clacTotalAmount(appData.basket) * 100}`,
+        url: `/payments/create?total=${
+          clacTotalAmount(appData.basket, "price") * 100
+        }`,
       });
 
       setClientSecret(response.data.clientSecret);
@@ -56,15 +58,21 @@ const Payment = () => {
       },
     });
 
+    console.log(elements.getElement(CardElement));
+    console.log(payload);
+
     const response = payload.paymentIntent;
 
     if (response) {
       setSucceeded(true);
       setError(null);
       setProcessing(false);
+      console.log("perfect");
     }
 
-    navigate("/orders");
+    console.log(response);
+
+    navigate("../", { replace: true });
   };
 
   const elementChangeHandler = (event) => {
