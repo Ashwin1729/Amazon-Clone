@@ -3,7 +3,7 @@ import styles from "./CheckoutProduct.module.css";
 import { StateContext } from "../store/StateProvider";
 
 const CheckoutProduct = forwardRef(
-  ({ id, image, title, price, rating }, ref) => {
+  ({ id, image, title, price, rating, hideButton }, ref) => {
     const [appData, dispatchAction] = useContext(StateContext);
 
     const removeFromBasketHandler = () => {
@@ -35,7 +35,11 @@ const CheckoutProduct = forwardRef(
                 <p>⭐</p>
               ))}
           </div>
-          <button onClick={removeFromBasketHandler}>Remove from Basket</button>
+          {!hideButton && (
+            <button onClick={removeFromBasketHandler}>
+              Remove from Basket
+            </button>
+          )}
         </div>
       </div>
     );

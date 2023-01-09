@@ -39,10 +39,12 @@ const Header = () => {
             </span>
           </div>
         </Link>
-        <div className={styles.header__option}>
-          <span className={styles.header__optionLineOne}>Returns</span>
-          <span className={styles.header__optionLineTwo}>& Orders</span>
-        </div>
+        <Link to="/orders">
+          <div className={styles.header__option}>
+            <span className={styles.header__optionLineOne}>Returns</span>
+            <span className={styles.header__optionLineTwo}>& Orders</span>
+          </div>
+        </Link>
         <div className={styles.header__option}>
           <span className={styles.header__optionLineOne}>Your</span>
           <span className={styles.header__optionLineTwo}>Prime</span>
