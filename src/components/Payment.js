@@ -6,6 +6,7 @@ import CheckoutProduct from "./CheckoutProduct";
 import FlipMove from "react-flip-move";
 import styles from "./Payment.module.css";
 import CurrencyFormat from "react-currency-format";
+import { db } from "../firebase";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 const Payment = () => {
@@ -58,21 +59,32 @@ const Payment = () => {
       },
     });
 
-    console.log(elements.getElement(CardElement));
-    console.log(payload);
-
     const response = payload.paymentIntent;
+    console.log(response);
 
     if (response) {
       setSucceeded(true);
       setError(null);
       setProcessing(false);
       console.log("perfect");
+
+      // add Items to database
+      db.collection("users")
+        .doc(appData.user?.uid)
+        .collection("orders")
+        .doc(response.id)
+        .set({
+          basket: appData.basket,
+          amount: response.amount,
+          created: response.created,
+        });
     }
 
-    console.log(response);
+    dispatchAction({
+      type: "EMPTY_BASKET",
+    });
 
-    navigate("../", { replace: true });
+    navigate("/orders", { replace: true });
   };
 
   const elementChangeHandler = (event) => {

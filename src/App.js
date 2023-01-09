@@ -2,14 +2,15 @@ import React, { useEffect, useContext } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Home from "./components/Home";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Checkout from "./components/Checkout";
 import Login from "./components/Login";
+import Payment from "./components/Payment";
+import Orders from "./components/Orders";
 import { StateContext } from "./store/StateProvider";
 import { auth } from "./firebase";
-import Payment from "./components/Payment";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const stripePromise = loadStripe(
   "pk_test_51MNqeCSHaCvRvJ1rTlh5OdekImjl9vrb2QhswQjovr9HBYsyDJ9CFvFMUO92LM5TTW8jIItBUotbw4EI51nqssO900Q8XA22rv"
@@ -65,6 +66,16 @@ function App() {
                 <Elements stripe={stripePromise}>
                   <Payment />
                 </Elements>
+              </div>
+            }
+          />
+          <Route
+            exact
+            path="/orders"
+            element={
+              <div>
+                <Header />
+                <Orders />
               </div>
             }
           />
